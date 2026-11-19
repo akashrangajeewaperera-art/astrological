@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Akash Astrological</title>
+<meta name="theme-color" content="#12383d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef2f1;--card:#fff;--ink:#12282b;--mut:#5a6f72;--line:#cfdcdb;--acc:#b86e00;--accbg:#fff1d6;--hd:#12383d;--hdink:#f6e7c4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0c1d20;--card:#132b2f;--ink:#e8f0ef;--mut:#9bb3b5;--line:#244247;--acc:#f0b33c;--accbg:#3a2f12;--hd:#071417;--hdink:#f0b33c}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0c1d20;--card:#132b2f;--ink:#e8f0ef;--mut:#9bb3b5;--line:#244247;--acc:#f0b33c;--accbg:#3a2f12;--hd:#071417;--hdink:#f0b33c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.7 "Noto Sans Sinhala","Iskoola Pota","Noto Sans Tamil","Latha",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hd);z-index:10}
+header{background:var(--hd);color:var(--hdink);padding:18px 16px 14px;position:sticky;top:env(safe-area-inset-top,0px);z-index:9}
+header h1{margin:0;font-size:22px;font-weight:800;letter-spacing:.02em}
+header p{margin:0;font-size:13px;opacity:.8}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .av{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--hdink);background:var(--bg)}
+.brand .nm{margin-top:2px;font-size:12px;line-height:1.4;opacity:.95;font-weight:600}
+
+nav{display:flex;gap:6px;overflow-x:auto;margin-top:10px}
+nav button{flex:none;border:1px solid var(--line);background:transparent;color:inherit;border-radius:20px;padding:5px 13px;font:inherit;font-size:14px}
+nav button.on{background:var(--acc);color:#12282b;border-color:var(--acc);font-weight:600}
+main{max-width:720px;margin:0 auto;padding:14px 14px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+h2{font-size:18px;margin:0 0 8px}h3{font-size:16px;margin:12px 0 4px}
+label{display:block;font-size:14px;color:var(--mut);margin-top:10px}
+input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{margin-top:14px;width:100%;padding:12px;border:0;border-radius:10px;background:var(--acc);color:#12282b;font:inherit;font-weight:800}
+.btn.alt{background:transparent;border:1px solid var(--line);color:var(--ink);font-weight:400}
+.big{font-size:26px;font-weight:800;color:var(--acc)}
+.mut{color:var(--mut);font-size:14px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+tr.cur td{background:var(--accbg);font-weight:600}
+.chart{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,76px);border:2px solid var(--acc);max-width:360px;margin:auto}
+.chart div{border:1px solid var(--line);padding:3px;font-size:12px;line-height:1.35;overflow:hidden}
+.chart .c{display:flex;align-items:center;justify-content:center;text-align:center;color:var(--acc);font-weight:800;font-size:14px}
+.chart small{color:var(--mut);display:block;font-size:10px}
+.chart .lg{background:var(--accbg)}
+.lang{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:4px 0 10px}
+.lang button{border:1px solid var(--line);background:transparent;color:inherit;border-radius:20px;padding:3px 12px;font:inherit;font-size:14px}
+.lang button.on{background:var(--acc);color:#12282b;border-color:var(--acc);font-weight:600}
+.tag{display:inline-block;background:var(--accbg);color:var(--acc);border-radius:6px;padding:0 8px;font-size:13px;margin-left:6px}
+.hand img{width:100%;max-height:220px;object-fit:cover;border-radius:8px;margin-top:8px}
+.price{border:2px dashed var(--acc);text-align:center}
+a.call{display:block;text-align:center;margin-top:10px;padding:12px;border-radius:10px;background:var(--hd);color:var(--hdink);text-decoration:none;font-weight:800}
+.hid{display:none}
+textarea{width:100%;min-height:70px;margin-top:6px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:13px}
+.chart{grid-template-rows:repeat(4,84px)}
+.good{color:#1f8a4c;font-weight:600}.bad{color:#c0392b;font-weight:600}
+@media print{header,nav,.btn,.noprint,body::before{display:none!important}:root:not([data-theme="x"]){color-scheme:light;--bg:#fff;--card:#fff;--ink:#000;--mut:#333;--line:#999;--acc:#8a5200;--accbg:#fff1d6}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">
+<img class="av" src="data:image/jpeg;base64,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" alt="අකාෂ් රංගජිව පෙරේරා" width="56" height="56">
+<div>
+<h1>Akash Astrological</h1>
+<p>ජ්‍යොතිෂ කේන්දර ගණනය</p>
+<p class="nm">උස්වත්ත ලියනගේ අකාෂ් රංගජිව පෙරේරා</p>
+</div>
+</div>
+<nav id="nav"></nav>
+</header>
+<main id="app"></main>
+<script>
+const PHONE="070 000 0000"; // ← ඔබේ දුරකථන අංකය මෙහි දමන්න
+const R=Math.PI/180,nm=x=>((x%360)+360)%360,sn=x=>Math.sin(x*R),cs=x=>Math.cos(x*R);
+const RASI=["මේෂ","වෘෂභ","මිථුන","කටක","සිංහ","කන්‍යා","තුලා","වෘශ්චික","ධනු","මකර","කුම්භ","මීන"];
+const RL=[2,5,3,1,0,3,5,2,4,6,6,4];
+const PN=["රවි","චන්ද්‍ර","කුජ","බුධ","ගුරු","සිකුරු","ශනි","රාහු","කේතු"];
+const PS=["ර","ච","කු","බු","ගු","සි","ශ","රා","කේ"];
+const NAK=["අස්විද","බරණ","කැති","රෙහෙණ","මුවසිරස","අද","පුනාවස","පුස","ආස්ලේසා","මා","පුවපල්","උත්තරපල්","හත","සිත","සා","විසා","අනුර","දෙට","මුල","පුරාසල","උතුරසල","සුවණ","දෙනට","සියාවස","පුවපුටුප","උත්තරපුටුප","රේවතී"];
+const DL=[8,5,0,1,2,7,4,6,3],DY={8:7,5:20,0:6,1:10,2:7,7:18,4:16,6:19,3:17};
+const PL={"පානදුර":[6.71,79.9],"කොළඹ":[6.93,79.85],"කළුතර":[6.58,79.96],"ගාල්ල":[6.05,80.22],"මාතර":[5.95,80.55],"කුරුණෑගල":[7.49,80.36],"මහනුවර":[7.29,80.63],"නුවරඑළිය":[6.97,80.77],"අනුරාධපුරය":[8.31,80.4],"යාපනය":[9.67,80.01],"රත්නපුර":[6.68,80.4],"මීගමුව":[7.21,79.84],"බදුල්ල":[6.99,81.06],"මඩකලපුව":[7.71,81.7]};
+const REM=[
+["ඉරිදා","රතු/තැඹිලි","මාණික්‍ය","උදෑසන සූර්යයාට නමස්කාරය, පියා හා වැඩිහිටියන්ට ගෞරවය, තිරිඟු ආහාර දානය"],
+["සඳුදා","සුදු","මුතු","පොහොය දින සිල් රැකීම, මවට සැලකීම, කිරි/සුදු ආහාර දානය"],
+["අඟහරුවාදා","රතු","පබළු","රතු පරිප්පු දානය, සහෝදරයන් සමඟ සමගිය, ක්‍රෝධය පාලනය"],
+["බදාදා","කොළ","මරකත","ඉගෙනුම් උපකරණ/පොත් දානය, කොළ පැහැති ආහාර, සත්‍යවාදිත්වය"],
+["බ්‍රහස්පතින්දා","කහ","පුෂ්පරාග","ගුරුවරුන්ට ගෞරවය, කහ පැහැති පිළිගැන්වීම්, දහම් පොත් දානය"],
+["සිකුරාදා","සුදු/ලා වර්ණ","දියමන්ති හෝ සුදු ඛනිජ","කාන්තාවන්ට සැලකීම, සුවඳ මල් පූජාව, පිරිසිදුව සිටීම"],
+["සෙනසුරාදා","නිල්/කළු","ඉන්ද්‍රනීල","තල තෙල් පහන් පූජා, සේවකයන්ට/දුප්පතුන්ට උපකාර, බෝධි පූජාව"],
+["සඳුදා/සෙනසුරාදා","තද පැහැති","ගෝමේද","බෝධි පූජාව, වැඩිහිටියන්ට උපකාර, අසත්‍ය/ණය වලින් වැළකීම"],
+["අඟහරුවාදා/සඳුදා","විවිධ වර්ණ","වෛඩූර්ය","සත්ව ආහාර දානය, භාවනාව, ගණ දෙවි පූජාව"]];
+const HGOOD=[1,4,5,7,9,10,11],HHARD=[6,8,12];
+function jd(y,m,d,h,mi,tz){return Date.UTC(y,m-1,d,h,mi)/864e5+2440587.5-tz/24}
+function kep(M,e){let E=M+e/R*sn(M);for(let i=0;i<8;i++)E=E-(E-e/R*sn(E)-M)/(1-e*cs(E));return E}
+function ayan(J){return 23.853+(J-2451545)/365.25*0.013969}
+function calc(J,lat,lon){
+ const d=J-2451543.5,L={};
+ const ms=nm(356.047+0.9856002585*d),ws=282.9404+4.70935e-5*d,es=.016709-1.151e-9*d;
+ let E=kep(ms,es),xv=cs(E)-es,yv=Math.sqrt(1-es*es)*sn(E),v=Math.atan2(yv,xv)/R,rs=Math.hypot(xv,yv);
+ const ls=nm(v+ws),xs=rs*cs(ls),ys=rs*sn(ls);L[0]=ls;
+ // Moon
+ const N=125.1228-0.0529538083*d,w=318.0634+0.1643573223*d,M=nm(115.3654+13.0649929509*d);
+ E=kep(M,.0549);xv=60.2666*(cs(E)-.0549);yv=60.2666*Math.sqrt(1-.0549**2)*sn(E);v=Math.atan2(yv,xv)/R;const r=Math.hypot(xv,yv);
+ const xh=r*(cs(N)*cs(v+w)-sn(N)*sn(v+w)*cs(5.1454)),yh=r*(sn(N)*cs(v+w)+cs(N)*sn(v+w)*cs(5.1454));
+ const Lm=N+w+M,Ls=ws+ms,D=Lm-Ls,F=Lm-N;
+ L[1]=nm(Math.atan2(yh,xh)/R-1.274*sn(M-2*D)+.658*sn(2*D)-.186*sn(ms)-.059*sn(2*M-2*D)-.057*sn(M-2*D+ms)+.053*sn(M+2*D)+.046*sn(2*D-ms)+.041*sn(M-ms)-.035*sn(D)-.031*sn(M+ms)-.015*sn(2*F-2*D)+.011*sn(M-4*D));
+ // planets: key,[N0,N1,i0,i1,w0,w1,a,e0,e1,M0,M1]
+ const P={2:[49.5574,2.11081e-5,1.8497,-1.78e-8,286.5016,2.92961e-5,1.523688,.093405,2.516e-9,18.6021,.5240207766],
+ 3:[48.3313,3.24587e-5,7.0047,5e-8,29.1241,1.01444e-5,.387098,.205635,5.59e-10,168.6562,4.0923344368],
+ 4:[100.4542,2.76854e-5,1.303,-1.557e-7,273.8777,1.64505e-5,5.20256,.048498,4.469e-9,19.895,.0830853001],
+ 5:[76.6799,2.4659e-5,3.3946,2.75e-8,54.891,1.38374e-5,.72333,.006773,-1.302e-9,48.0052,1.6021302244],
+ 6:[113.6634,2.3898e-5,2.4886,-1.081e-7,339.3939,2.97661e-5,9.55475,.055546,-9.499e-9,316.967,.0334442282]};
+ const Mj=19.895+.0830853001*d,Ms2=316.967+.0334442282*d;
+ for(const k in P){const q=P[k],n=q[0]+q[1]*d,i=q[2]+q[3]*d,ww=q[4]+q[5]*d,e=q[7]+q[8]*d,m=nm(q[9]+q[10]*d);
+  const Ek=kep(m,e),x=q[6]*(cs(Ek)-e),y=q[6]*Math.sqrt(1-e*e)*sn(Ek),vv=Math.atan2(y,x)/R,rr=Math.hypot(x,y);
+  const X=rr*(cs(n)*cs(vv+ww)-sn(n)*sn(vv+ww)*cs(i))+xs,Y=rr*(sn(n)*cs(vv+ww)+cs(n)*sn(vv+ww)*cs(i))+ys;
+  let lo=Math.atan2(Y,X)/R;
+  if(k==4)lo+=-.332*sn(2*Mj-5*Ms2*0-5*ms-67.6)-.056*sn(2*Mj-2*ms+21)+.042*sn(3*Mj-5*ms+21)-.036*sn(Mj-2*ms)+.022*cs(Mj-ms)+.023*sn(2*Mj-3*ms+52)-.016*sn(Mj-5*ms-69);
+  if(k==6)lo+=.812*sn(2*Mj-5*ms-67.6)-.229*cs(2*Mj-4*ms-2)+.119*sn(Mj-2*ms-3)+.046*sn(2*Mj-6*ms-69)+.014*sn(Mj-3*ms+32);
+  L[k]=nm(lo)}
+ L[7]=nm(N);L[8]=nm(N+180);
+ const T=(J-2451545)/36525,th=nm(280.46061837+360.98564736629*(J-2451545)+.000387933*T*T+lon),eps=23.4393-.0130042*T;
+ const asc=nm(Math.atan2(cs(th),-(sn(th)*cs(eps)+Math.tan(lat*R)*sn(eps)))/R);
+ const ay=ayan(J),sid=L.map?0:0,S={};
+ for(let k=0;k<9;k++)S[k]=nm(L[k]-ay);
+ return{S,asc:nm(asc-ay),ay}
+}
+const fmt=x=>{const d=Math.floor(x%30),m=Math.floor(((x%30)-d)*60);return d+"°"+String(m).padStart(2,"0")+"′"};
+const nak=x=>{const n=Math.floor(x/(360/27));return[n,Math.floor((x%(360/27))/(360/108))+1]};
+function dashas(moon,birth){
+ const nk=Math.floor(moon/(360/27)),fr=(moon%(360/27))/(360/27),lord=DL[nk%9],Y=365.25*864e5;
+ const out=[];let t=birth.getTime()-fr*DY[lord]*Y,idx=DL.indexOf(lord);
+ for(let i=0;i<9;i++){const l=DL[(idx+i)%9],len=DY[l]*Y,ad=[];let tt=t;
+  for(let j=0;j<9;j++){const a=DL[(idx+i+j)%9],al=len*DY[a]/120;ad.push({l:a,s:tt,e:tt+al});tt+=al}
+  out.push({l,s:t,e:t+len,ad});t+=len}
+ const b=birth.getTime();out[0].s=b;out[0].ad=out[0].ad.filter(a=>a.e>b);out[0].ad.forEach(a=>{if(a.s<b)a.s=b});
+ return out}
+const ds=t=>new Date(t).toISOString().slice(0,10);
+let ST={tab:"in",res:null},HAND={};
+const TABS=[["in",["විස්තර ඇතුළත් කරන්න","Enter Details","விவரங்கள்"]],["ch",["කේන්දරය","Chart","ஜாதகம்"]],["ds",["දශා","Dasha","தசை"]],["pr",["පලාපල","Predictions","பலன்கள்"]],["rm",["පිළියම්","Remedies","பரிகாரம்"]],["hd",["අත් රේඛා PDF","Palm","கை ரேகை"]],["sm",["සාරාංශය","Summary","சுருக்கம்"]],["mo",["වැඩිදුර","More","மேலும்"]]];
+function nav(){document.getElementById("nav").innerHTML=TABS.map(t=>`<button class="${ST.tab==t[0]?"on":""}" onclick="go('${t[0]}')">${t[1][LI()]}</button>`).join("")}
+function go(t){ST.tab=t;render();window.scrollTo(0,0)}
+function lsGet(){try{return JSON.parse(localStorage.getItem("akash_profiles")||"[]")}catch(e){return[]}}
+function lsSet(a){try{localStorage.setItem("akash_profiles",JSON.stringify(a))}catch(e){}}
+function viewIn(){
+ const v=ST.form||{name:"",date:"1990-02-26",time:"12:56",place:"පානදුර",tz:"5.5",lat:6.71,lon:79.9};
+ const saved=lsGet();
+ return `<div class="card"><h2>${T("උපන් විස්තර","Birth Details","பிறப்பு விவரங்கள்")}</h2>
+ <label>${T("නම","Name","பெயர்")}</label><input id="f_name" value="${v.name}">
+ <div class="row"><div><label>${T("උපන් දිනය","Date of birth","பிறந்த தேதி")}</label><input id="f_date" type="date" value="${v.date}"></div>
+ <div><label>${T("උපන් වේලාව","Time of birth","பிறந்த நேரம்")}</label><input id="f_time" type="time" value="${v.time}"></div></div>
+ <label>${T("උපන් ස්ථානය","Place of birth","பிறந்த இடம்")}</label><select id="f_place" onchange="pl()">${Object.keys(PL).map(p=>`<option ${p==v.place?"selected":""}>${p}</option>`).join("")}<option ${v.place=="අන් ස්ථානයක්"?"selected":""}>අන් ස්ථානයක්</option></select>
+ <div class="row"><div><label>${T("අක්ෂාංශය (උතුර)","Latitude (N)","அட்சரேகை (வ)")}</label><input id="f_lat" type="number" step="0.01" value="${v.lat}"></div>
+ <div><label>${T("දේශාංශය (නැගෙනහිර)","Longitude (E)","தீர்க்கரேகை (கி)")}</label><input id="f_lon" type="number" step="0.01" value="${v.lon}"></div></div>
+ <label>${T("වේලා කලාපය (UTC +)","Time zone (UTC +)","நேர மண்டலம் (UTC +)")}</label><input id="f_tz" type="number" step="0.5" value="${v.tz}">
+ <button class="btn" onclick="run()">${T("කේන්දරය ගණනය කරන්න","Calculate Chart","ஜாதகம் கணிக்க")}</button></div>
+ ${saved.length?`<div class="card"><h2>${T("සුරැකි කේන්දර","Saved Charts","சேமித்தவை")}</h2>${saved.map((s,i)=>`<div class="row" style="grid-template-columns:1fr auto auto;align-items:center;margin-bottom:6px"><span>${s.name||"නමක් නැත"} <span class="mut">${s.date}</span></span><button class="btn alt" style="margin:0;width:auto;padding:6px 12px" onclick="ld(${i})">${T("විවෘත","Open","திற")}</button><button class="btn alt" style="margin:0;width:auto;padding:6px 12px" onclick="rmv(${i})">${T("මකන්න","Delete","நீக்கு")}</button></div>`).join("")}<p class="mut">මෙම දත්ත සුරැකෙන්නේ ඔබේ උපකරණයේ පමණි.</p></div>`:""}`}
+function pl(){const p=document.getElementById("f_place").value;if(PL[p]){f_lat.value=PL[p][0];f_lon.value=PL[p][1]}}
+function readForm(){return{name:f_name.value,date:f_date.value,time:f_time.value,place:f_place.value,tz:f_tz.value,lat:+f_lat.value,lon:+f_lon.value}}
+function run(){const v=readForm();if(!v.date||!v.time){alert("දිනය සහ වේලාව ඇතුළත් කරන්න");return}
+ ST.form=v;const[y,m,d]=v.date.split("-").map(Number),[h,mi]=v.time.split(":").map(Number),tz=+v.tz;
+ const J=jd(y,m,d,h,mi,tz),c=calc(J,v.lat,v.lon),birth=new Date(Date.UTC(y,m-1,d,h,mi)-tz*36e5);
+ c.birth=birth;c.das=dashas(c.S[1],birth);c.v=v;c.now=calc(J,v.lat,v.lon);ST.res=c;
+ const a=lsGet(),ix=a.findIndex(s=>s.date==v.date&&s.time==v.time&&s.name==v.name&&s.place==v.place);if(ix>=0)a[ix]=v;else a.unshift(v);lsSet(a.slice(0,30))
+ go("ch")}
+function ld(i){ST.form=lsGet()[i];render();run()}
+function rmv(i){const a=lsGet();a.splice(i,1);lsSet(a);render()}
+const sg=x=>Math.floor(x/30),LG=c=>sg(c.asc),HS=(c,k)=>(sg(c.S[k])-LG(c)+12)%12+1;
+function needRes(){return ST.res?"":`<div class="card">${T("මුලින් උපන් විස්තර ඇතුළත් කර ගණනය කරන්න.","Please enter birth details and calculate first.","முதலில் பிறப்பு விவரங்களை உள்ளிடவும்.")}<button class="btn" onclick="go('in')">${T("විස්තර ඇතුළත් කරන්න","Enter Details","விவரங்கள்")}</button></div>`}
+function viewCh(){const c=ST.res;if(!c)return needRes();
+ const pos={0:[0,1],1:[0,2],2:[0,3],3:[1,3],4:[2,3],5:[3,3],6:[3,2],7:[3,1],8:[3,0],9:[2,0],10:[1,0],11:[0,0]};
+ const cells=Array(12).fill("").map((_,i)=>"");const cont={};
+ for(let k=0;k<9;k++){const s=sg(c.S[k]);(cont[s]=cont[s]||[]).push(PS[k])}
+ let g="";for(let s=0;s<12;s++){const[r,cl]=pos[s];g+=`<div class="${s==LG(c)?"lg":""}" style="grid-row:${r+1};grid-column:${cl+1}"><small>${RASI[s]}</small>${s==LG(c)?"<b>ල</b> ":""}${(cont[s]||[]).join(" ")}</div>`}
+ const nk=nak(c.S[1]);
+ return `<div class="card"><div class="mut">${c.v.name||"කේන්දරය"} · ${c.v.date} ${c.v.time} · ${c.v.place}</div>
+ <div class="big">${T("ලග්නය","Lagna","லக்னம்")}: ${RASI[LG(c)]} <span class="mut">${fmt(c.asc)}</span></div>
+ <div>${T("චන්ද්‍ර රාශිය","Moon sign","சந்திர ராசி")}: ${RASI[sg(c.S[1])]} · ${T("නැකත","Nakshatra","நட்சத்திரம்")}: ${NAK[nk[0]]} ${nk[1]}${T(" වන පාදය","th pada"," ஆம் பாதம்")}</div>
+ <div class="mut">${T("ලග්නාධිපති","Lagna lord","லக்னாதிபதி")}: ${PN[RL[LG(c)]]} · ${T("අයනාංශය (ලාහිරි)","Ayanamsa (Lahiri)","அயனாம்சம் (லாஹிரி)")}: ${fmt(c.ay)}</div>
+ ${(c.asc%30>28.5||c.asc%30<1.5)?`<p class="mut">ලග්නය රාශි සීමාවට ආසන්නයි; උපන් වේලාව විනාඩි කිහිපයක් වෙනස් වුවහොත් ලග්නය වෙනස් විය හැක. උප්පැන්න සහතිකයෙන් වේලාව තහවුරු කරන්න.</p>`:""}</div>
+ <div class="card"><h2>රාශි චක්‍රය</h2><div class="chart">${g}<div class="c">${c.v.name||""}<br>${RASI[LG(c)]} ලග්නය</div></div></div>
+ <div class="card"><h2>ග්‍රහ පිහිටීම්</h2><div class="scroll"><table><tr><th>ග්‍රහයා</th><th>රාශිය</th><th>අංශ</th><th>නැකත</th><th>භාවය</th></tr>
+ ${PN.map((n,k)=>{const q=nak(c.S[k]);return `<tr><td>${n}</td><td>${RASI[sg(c.S[k])]}</td><td>${fmt(c.S[k])}</td><td>${NAK[q[0]]} ${q[1]}</td><td>${HS(c,k)}</td></tr>`}).join("")}</table></div>
+ <button class="btn alt" onclick="go('ds')">විශෝංත්තරී දශා බලන්න</button></div>`}
+function cur(c){const t=Date.now();const m=c.das.find(x=>t>=x.s&&t<x.e)||c.das[0];const a=m.ad.find(x=>t>=x.s&&t<x.e)||m.ad[0];return{m,a}}
+function viewDs0(){const c=ST.res;if(!c)return needRes();const{m,a}=cur(c),t=Date.now();
+ return `<div class="card"><h2>${T("වත්මන් දශාව","Current Dasha","தற்போதைய தசை")}</h2><div class="big">${PN[m.l]} ${T("මහ දශාව","Mahadasha","மகா தசை")}</div><div>${PN[a.l]} ${T("අපහාරය","Antardasha","புத்தி")}: ${ds(a.s)} ${T("සිට","to","முதல்")} ${ds(a.e)} ${T("දක්වා","","வரை")}</div></div>
+ <div class="card"><h2>${T("මහ දශා","Mahadashas","மகா தசைகள்")}</h2><div class="scroll"><table><tr><th>${T("දශාව","Dasha","தசை")}</th><th>${T("ආරම්භය","Start","தொடக்கம்")}</th><th>${T("අවසානය","End","முடிவு")}</th></tr>${c.das.map(x=>`<tr class="${x===m?"cur":""}"><td>${PN[x.l]}</td><td>${ds(x.s)}</td><td>${ds(x.e)}</td></tr>`).join("")}</table></div></div>
+ <div class="card"><h2>${PN[m.l]} ${T("දශාවේ අපහාර","Antardashas","புத்திகள்")}</h2><div class="scroll"><table><tr><th>${T("අපහාරය","Antardasha","புத்தி")}</th><th>${T("සිට","From","முதல்")}</th><th>${T("දක්වා","To","வரை")}</th></tr>${m.ad.map(x=>`<tr class="${x===a?"cur":""}"><td>${PN[x.l]}</td><td>${ds(x.s)}</td><td>${ds(x.e)}</td></tr>`).join("")}</table></div></div>`}
+const LNS=[["si","සිංහල"],["en","English"],["ta","தமிழ்"]];
+const LI=()=>({si:0,en:1,ta:2}[ST.lang]||0);
+const PNX=[PN,["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu"],["சூரியன்","சந்திரன்","செவ்வாய்","புதன்","குரு","சுக்கிரன்","சனி","ராகு","கேது"]];
+const RASX=[RASI,["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"],["மேஷம்","ரிஷபம்","மிதுனம்","கடகம்","சிம்மம்","கன்னி","துலாம்","விருச்சிகம்","தனுசு","மகரம்","கும்பம்","மீனம்"]];
+const pn=k=>PNX[LI()][k],rs=s=>RASX[LI()][s];
+const REMX=[[
+["Sunday","Red/Orange","Ruby","Salutation to the Sun in the morning, respect for father and elders, donating wheat foods"],
+["Monday","White","Pearl","Observing sil on Poya days, caring for mother, donating milk/white foods"],
+["Tuesday","Red","Coral","Donating red lentils, harmony with siblings, controlling anger"],
+["Wednesday","Green","Emerald","Donating study materials/books, green foods, truthfulness"],
+["Thursday","Yellow","Yellow sapphire (topaz)","Respect for teachers, yellow offerings, donating religious books"],
+["Friday","White/Light colours","Diamond or white minerals","Caring for women, offering fragrant flowers, keeping clean"],
+["Saturday","Blue/Black","Blue sapphire","Offering sesame-oil lamps, helping servants/the poor, offering to the Bo tree"],
+["Monday/Saturday","Dark colours","Hessonite (gomed)","Offering to the Bo tree, helping elders, avoiding falsehood and debts"],
+["Tuesday/Monday","Multicoloured","Cat's eye","Donating animal food, meditation, worshipping Lord Ganesha"]],[
+["ஞாயிறு","சிவப்பு/ஆரஞ்சு","மாணிக்கம்","காலை சூரிய நமஸ்காரம், தந்தை மற்றும் பெரியோருக்கு மரியாதை, கோதுமை உணவு தானம்"],
+["திங்கள்","வெள்ளை","முத்து","பௌர்ணமி நாளில் சீலம் அனுஷ்டித்தல், தாயாரைப் பேணுதல், பால்/வெள்ளை உணவு தானம்"],
+["செவ்வாய்","சிவப்பு","பவளம்","சிவப்பு பருப்பு தானம், சகோதரர்களுடன் ஒற்றுமை, கோபத்தைக் கட்டுப்படுத்துதல்"],
+["புதன்","பச்சை","மரகதம்","கல்விப் பொருட்கள்/புத்தகங்கள் தானம், பச்சை நிற உணவுகள், உண்மை பேசுதல்"],
+["வியாழன்","மஞ்சள்","புஷ்பராகம்","ஆசிரியர்களுக்கு மரியாதை, மஞ்சள் நிறப் படையல்கள், சமய நூல் தானம்"],
+["வெள்ளி","வெள்ளை/இளநிறங்கள்","வைரம் அல்லது வெள்ளைக் கற்கள்","பெண்களுக்கு மரியாதை, வாசனை மலர் வழிபாடு, தூய்மையைப் பேணுதல்"],
+["சனி","நீலம்/கருப்பு","நீலக்கல்","எள் எண்ணெய் தீபம் ஏற்றுதல், பணியாளர்/ஏழைகளுக்கு உதவுதல், போதி மர வழிபாடு"],
+["திங்கள்/சனி","அடர் நிறங்கள்","கோமேதகம்","போதி மர வழிபாடு, பெரியோருக்கு உதவுதல், பொய் மற்றும் கடன்களைத் தவிர்த்தல்"],
+["செவ்வாய்/திங்கள்","பல வண்ணங்கள்","வைடூரியம்","விலங்குகளுக்கு உணவு தானம், தியானம், விநாயகர் வழிபாடு"]]];
+const PN0=[...PN],RASI0=[...RASI],PS0=[...PS],PSX=[PS0,["Su","Mo","Ma","Me","Ju","Ve","Sa","Ra","Ke"],["சூ","சந்","செ","புத","குரு","சுக்","சனி","ரா","கே"]];
+const T=(a,b,c)=>[a,b,c][LI()];
+function setLang(l){ST.lang=l;const i=LI();PN.splice(0,9,...(i?PNX[i]:PN0));RASI.splice(0,12,...(i?RASX[i]:RASI0));PS.splice(0,9,...PSX[i]);render()}
+function langBar(){const i=LI();return `<div class="lang"><span class="mut">භාෂාව · Language · மொழி</span>${LNS.map((l,n)=>`<button class="${i==n?"on":""}" onclick="setLang('${l[0]}')">${i==n?"✓ ":""}${l[1]}</button>`).join("")}</div>`}
+const AV=[["ශක්තිමත් පිහිටීමකි; මෙම ක්ෂේත්‍රයේ යහපත් ප්‍රතිඵල අපේක්ෂා කළ හැක.","A strong placement; good results can be expected in this area.","வலிமையான அமைப்பு; இத்துறையில் நல்ல பலன்களை எதிர்பார்க்கலாம்."],
+["බාධා හෝ ප්‍රමාද ඇති විය හැකි පිහිටීමකි; ඉවසීමෙන් හා පිළියම් සමඟ ප්‍රතිඵල වැඩි දියුණු කරගත හැක.","A placement that may bring obstacles or delays; results can improve with patience and remedies.","தடைகள் அல்லது தாமதங்கள் ஏற்படக்கூடிய அமைப்பு; பொறுமையுடனும் பரிகாரங்களுடனும் பலன்களை மேம்படுத்தலாம்."],
+["මධ්‍යස්ථ පිහිටීමකි; උත්සාහයෙන් ප්‍රතිඵල ලැබේ.","A moderate placement; results come through effort.","மத்திமமான அமைப்பு; முயற்சியால் பலன் கிடைக்கும்."]];
+function area(c,N,h){const s=(LG(c)+h-1)%12,lk=RL[s],lh=HS(c,lk),occ=[],i=LI();for(let k=0;k<9;k++)if(HS(c,k)==h)occ.push(k);
+ const v=HGOOD.includes(lh)?AV[0][i]:HHARD.includes(lh)?AV[1][i]:AV[2][i];
+ const ben=occ.filter(k=>[1,3,4,5].includes(k)),mal=occ.filter(k=>[0,2,6,7,8].includes(k)),bl=ben.map(k=>pn(k)).join(", "),ml=mal.map(k=>pn(k)).join(", ");
+ const tag=[`${h} වන භාවය · ${RASI[s]}`,`House ${h} · ${rs(s)}`,`${h}-ஆம் பாவம் · ${rs(s)}`][i];
+ const lead=[`අධිපති ${pn(lk)} ${lh} වන භාවයේ ඇත.`,`The house lord ${pn(lk)} is in house ${lh}.`,`அதிபதி ${pn(lk)} ${lh}-ஆம் பாவத்தில் உள்ளார்.`][i];
+ const bt=ben.length?" "+[`${bl} ග්‍රහයන්ගේ සහාය ඇත.`,`Supported by ${bl}.`,`${bl} கிரகங்களின் ஆதரவு உண்டு.`][i]:"";
+ const mt=mal.length?" "+[`${ml} ග්‍රහයන්ගේ බලපෑමෙන් අභියෝග ඇති විය හැක.`,`Challenges may arise from the influence of ${ml}.`,`${ml} கிரகங்களின் தாக்கத்தால் சவால்கள் ஏற்படலாம்.`][i]:"";
+ return `<h3>${N[i]} <span class="tag">${tag}</span></h3><div>${lead} ${v}${bt}${mt}</div>`}
+function viewPr(){const c=ST.res;if(!c)return needRes();const{m,a}=cur(c),i=LI(),hm=HS(c,m.l);
+ const vd=HGOOD.includes(hm)?["මෙම කාලය සාමාන්‍යයෙන් ප්‍රගතිශීලී වේ.","this period is generally progressive.","இக்காலம் பொதுவாக முன்னேற்றமானது."]:HHARD.includes(hm)?["මෙම කාලයේ ඉවසීම හා පරෙස්සම අවශ්‍ය වේ.","patience and caution are needed in this period.","இக்காலத்தில் பொறுமையும் எச்சரிக்கையும் தேவை."]:["මෙම කාලය මිශ්‍ර ප්‍රතිඵල ගෙන දේ.","this period brings mixed results.","இக்காலம் கலப்பு பலன்களைத் தரும்."];
+ const fut=[`දැන් ${pn(m.l)} මහ දශාවේ ${pn(a.l)} අපහාරය පවතී (${ds(a.s)} – ${ds(a.e)}). ${pn(m.l)} ග්‍රහයා ${hm} වන භාවයේ පිහිටි බැවින් ${vd[0]}`,`Currently the ${pn(m.l)} mahadasha and ${pn(a.l)} antardasha are running (${ds(a.s)} – ${ds(a.e)}). Since ${pn(m.l)} is in house ${hm}, ${vd[1]}`,`இப்போது ${pn(m.l)} மகா தசையில் ${pn(a.l)} புத்தி நடைபெறுகிறது (${ds(a.s)} – ${ds(a.e)}). ${pn(m.l)} கிரகம் ${hm}-ஆம் பாவத்தில் இருப்பதால் ${vd[2]}`][i];
+ return `<div class="card"><h2>${["පලාපල","Predictions","பலன்கள்"][i]}</h2><div class="mut">${["ලග්නය, භාව අධිපතීන්ගේ පිහිටීම් සහ වත්මන් දශාව අනුව ස්වයංක්‍රීයව සකසන ලද පොදු විග්‍රහයකි.","A general reading generated automatically from the ascendant, the house lords' positions and the current dasha.","லக்னம், பாவாதிபதிகளின் நிலை மற்றும் தற்போதைய தசையின் அடிப்படையில் தானாக உருவாக்கப்பட்ட பொதுவான விளக்கம்."][i]}</div>
+ ${area(c,["ස්වභාවය හා පෞරුෂය","Nature & Personality","இயல்பும் ஆளுமையும்"],1)}${area(c,["ධනය හා පවුල","Wealth & Family","செல்வமும் குடும்பமும்"],2)}${area(c,["ඉගෙනීම","Education","கல்வி"],5)}${area(c,["රැකියාව හා කීර්තිය","Career & Reputation","தொழிலும் புகழும்"],10)}${area(c,["විවාහය","Marriage","திருமணம்"],7)}${area(c,["සෞඛ්‍යය","Health","ஆரோக்கியம்"],6)}
+ <h3>${["ඉදිරි කාලය","Coming Period","வரும் காலம்"][i]}</h3><div>${fut}</div>
+ <p class="mut">${["මෙය මාර්ගෝපදේශයක් පමණි. වැදගත් තීරණ සඳහා පළපුරුදු ජ්‍යොතිර්වේදියෙකුගේ උපදෙස් ලබාගන්න.","This is only a guide. For important decisions, seek advice from an experienced astrologer.","இது ஒரு வழிகாட்டி மட்டுமே. முக்கிய முடிவுகளுக்கு அனுபவமுள்ள ஜோதிடரின் ஆலோசனையைப் பெறுங்கள்."][i]}</p></div>`}
+function viewRm(){const c=ST.res;if(!c)return needRes();const{m,a}=cur(c),set={},i=LI();
+ for(let k=0;k<9;k++)if(HHARD.includes(HS(c,k)))(set[k]=set[k]||[]).push(["h",HS(c,k)]);
+ (set[m.l]=set[m.l]||[]).push(["m"]);(set[a.l]=set[a.l]||[]).push(["a"]);
+ const rr=x=>x[0]=="h"?[`${x[1]} වන භාවයේ පිහිටීම`,`Placement in house ${x[1]}`,`${x[1]}-ஆம் பாவத்தில் நிலை`][i]:x[0]=="m"?["වත්මන් මහ දශාව","Current mahadasha","தற்போதைய மகா தசை"][i]:["වත්මන් අපහාරය","Current antardasha","தற்போதைய புத்தி"][i];
+ const lb=[["දිනය","වර්ණය","රත්නය"],["Day","Colour","Gem"],["கிழமை","நிறம்","ரத்தினம்"]][i];
+ return `<div class="card"><h2>${["ග්‍රහ අපල සඳහා පිළියම්","Remedies for Planetary Afflictions","கிரக தோஷங்களுக்கான பரிகாரங்கள்"][i]}</h2><div class="mut">${["දුබල පිහිටීම් සහ වත්මන් දශා අනුව ග්‍රහයා බැගින් වෙන් කර දක්වා ඇත.","Shown planet by planet according to weak placements and the current dashas.","பலவீனமான அமைப்புகள் மற்றும் தற்போதைய தசைகளின் அடிப்படையில் கிரகம் வாரியாகக் காட்டப்பட்டுள்ளது."][i]}</div>
+ ${Object.keys(set).map(k=>{const r=i==0?REM[k]:REMX[i-1][k];return `<h3>${pn(k)} <span class="tag">${set[k].map(rr).join(" · ")}</span></h3><div>${lb[0]}: ${r[0]} · ${lb[1]}: ${r[1]}<br>${lb[2]}: ${r[2]}<br>${r[3]}</div>`}).join("")}
+ <p class="mut">${["රත්න පැළඳීමට පෙර ජ්‍යොතිර්වේදියෙකුගේ උපදෙස් ලබාගන්න.","Consult an astrologer before wearing gemstones.","ரத்தினம் அணிவதற்கு முன் ஜோதிடரின் ஆலோசனையைப் பெறுங்கள்."][i]}</p></div>`}
+const HAREA=["","ශරීර සෞඛ්‍යය හා ආත්ම ස්වභාවය","ධනය හා පවුල","උත්සාහය හා සහෝදරයන්","නිවස, මව හා අධ්‍යාපනය","දරුවන්, අධ්‍යාපනය හා ආලය","රෝග, ණය හා සතුරු කටයුතු","විවාහය හා හවුල් කටයුතු","අනපේක්ෂිත සිදුවීම් හා ආයුෂ","වාසනාව, ආගම හා ඉහළ අධ්‍යාපනය","රැකියාව හා කීර්තිය","ලාභ හා මිතුරන්","වියදම්, විදේශ හා හුදකලාව"];
+const shb=h=>HGOOD.includes(h)?"ශුභ":HHARD.includes(h)?"අශුභ":"මධ්‍යස්ථ";
+const lordOf=(c,h)=>RL[(LG(c)+h-1)%12];
+function pscore(c,k){const h=HS(c,k),d=dig(k,sg(c.S[k]));let x=HGOOD.includes(h)?1:HHARD.includes(h)?-1:0;if(d=="උච්ච")x+=1.5;else if(d=="ස්වක්ෂේත්‍ර")x+=1;else if(d=="නීච")x-=1.5;return x}
+const uniq=a=>[...new Set(a)];
+const LGP=[
+["නායකත්වය, නිර්භීතකම, ස්වාධීන බව; ඉක්මන් කෝපය ඇති විය හැක.","වේගවත්, ක්‍රියාශීලී; ඉක්මන් තීරණ ගනී.","මධ්‍යම උස, ශක්තිමත් ශරීරයක්, පුළුල් නළලක් හා ඉක්මන් ගමනක්."],
+["ඉවසීම, ස්ථාවර බව, සැප පහසු කැමැත්ත; ඇලී ගැනීම් ශක්තිමත්.","සෙමින් නමුත් ස්ථිර ලෙස සිතයි; වෙනස්කම් ඉක්මනින් නොපිළිගනී.","ශක්තිමත් කඳක්, ඝන බෙල්ලක්, ආකර්ෂණීය මුහුණක්."],
+["බුද්ධිමත්, කතාබහට දක්ෂ, කුතුහලය ඉහළ; අස්ථාවර බවක් ඇති විය හැක.","ඉක්මන්, එකවර කරුණු කිහිපයක් ගැන සිතයි.","උස හා සිහින් ශරීරයක්, දිගු අත්, චපල ඇස්."],
+["සංවේදී, සැලකිලිමත්, පවුල ඇල්ම; මනෝභාව වෙනස් වීම් සිදු විය හැක.","හැඟීම් මත සිතිවිලි බොහෝවිට මෙහෙයවේ.","මධ්‍යම හෝ කෙටි උස, වටකුරු මුහුණ, පුළුල් පපුව."],
+["ආඩම්බර, නායක ගුණ, උදාර; ගෞරවය බලාපොරොත්තු වේ.","ඉහළ ඉලක්ක, බලය හා පිළිගැනීම ගැන සිතයි.","ශක්තිමත් පුළුල් උරහිස්, ගෞරවනීය පෙනුමක්, විශාල හිසක්."],
+["විශ්ලේෂණාත්මක, පිළිවෙළ, නිහතමානී; සියුම් කරුණු කෙරෙහි සැලකිලිමත් වේ.","සවිස්තරාත්මක හා විවේචනාත්මක ලෙස සිතයි.","සිහින් හෝ මධ්‍යම ශරීරයක්, ලස්සන මුහුණක්, තරුණ පෙනුමක්."],
+["සමතුලිත, සාධාරණ, සමාජශීලී; කලාවට ඇල්මක් ඇත.","යුක්තිය ගැන සිතයි; තීරණ ගැනීමේදී පමා විය හැක.","සමමිතික ශරීරයක්, ආකර්ෂණීය මුහුණක්, මධ්‍යම උස."],
+["තීව්‍ර, අධිෂ්ඨානශීලී, රහස් ආරක්ෂා කරයි; ක්‍රෝධය/වෛරය ගැඹුරු විය හැක.","ගැඹුරු, පරීක්ෂාකාරී; පෙනුමට වඩා අභ්‍යන්තරය බලයි.","ශක්තිමත් ශරීරයක්, තියුණු බැල්මක්, මධ්‍යම උස."],
+["ආගමික, සත්‍යවාදී, සාධාරණ, ශුභවාදී.","ඉහළ දැක්මක්, දර්ශනය හා ධර්මය ගැන සිතයි.","උස ශරීරයක්, දිගු ඉණ හා කකුල්, පුළුල් නළලක්."],
+["විනයගරුක, වගකිවයුතු, උත්සාහවන්ත, සංයමී.","ප්‍රායෝගික; දීර්ඝ කාලීන සැලසුම් ගැන සිතයි.","සිහින් ශරීරයක්, පැහැදිලි ඇටකටු, සන්සුන් පෙනුමක්."],
+["මානවවාදී, නව අදහස් ඇති, ස්වාධීන, මිත්‍රශීලී.","අනාගතය දෙස බලයි; සාමාන්‍යයට වඩා වෙනස් ලෙස සිතයි.","මධ්‍යම හෝ උස ශරීරයක්, හොඳ ඉරියව්වක්, සන්සුන් බැල්මක්."],
+["කරුණාවන්ත, සංවේදී, පරිකල්පනශීලී, ආධ්‍යාත්මික.","සිහින හා අන්තර්ඥානය මත සිතිවිලි පදනම් වේ.","මෘදු ශරීරයක්, මධ්‍යම හෝ කෙටි උස, විශාල ඇස්."]];
+const SP=[
+["ශක්තිමත්, ස්වාධීන, ඉක්මන් කෝපී සහකරුවෙකි.","මධ්‍යම උස, ශක්තිමත් හා ක්‍රියාශීලී පෙනුම."],
+["ඉවසිලිවන්ත, ස්ථාවර, පවුල හා සැප පහසුවට ඇලුම් කරන සහකරුවෙකි.","ආකර්ෂණීය මුහුණ, ශක්තිමත් හා වටකුරු ශරීරයක්."],
+["බුද්ධිමත්, කතාබහට දක්ෂ, තරුණ ගති ඇති සහකරුවෙකි.","උස, සිහින්, චපල පෙනුමක්."],
+["සැලකිලිමත්, සංවේදී, ගෘහ ජීවිතයට ආදරය කරන සහකරුවෙකි.","වටකුරු මුහුණ, මෘදු පෙනුමක්."],
+["ආඩම්බර, උදාර, නායකත්ව ගුණ ඇති සහකරුවෙකි.","ගෞරවනීය, පුළුල් ශරීරයක්."],
+["පිළිවෙළ, විශ්ලේෂණාත්මක, නිහතමානී සහකරුවෙකි.","සිහින්, ලස්සන මුහුණක්, තරුණ පෙනුමක්."],
+["සමතුලිත, කලාවට ඇල්මැති, සමාජශීලී සහකරුවෙකි.","ආකර්ෂණීය, සමමිතික පෙනුමක්."],
+["තීව්‍ර, අධිෂ්ඨානශීලී, රහස්ශීලී සහකරුවෙකි.","තියුණු බැල්මක්, ශක්තිමත් පෙනුමක්."],
+["සත්‍යවාදී, ආගමික, ශුභවාදී සහකරුවෙකි.","උස, පුළුල් නළලක් සහිත පෙනුමක්."],
+["වගකිවයුතු, විනයගරුක, ගැඹුරු සහකරුවෙකි.","සිහින්, ඇටකටු පැහැදිලි, පරිණත පෙනුමක්."],
+["මිත්‍රශීලී, නව අදහස් ඇති, ස්වාධීන සහකරුවෙකි.","මධ්‍යම හෝ උස, සන්සුන් පෙනුමක්."],
+["කරුණාවන්ත, පරිකල්පනශීලී, සංවේදී සහකරුවෙකි.","මෘදු, විශාල ඇස් ඇති පෙනුමක්."]];
+const EDU=[
+["රාජ්‍ය පරිපාලනය, වෛද්‍ය, දේශපාලන විද්‍යාව","ඉතිහාසය, සමාජ අධ්‍යයනය","ජීව විද්‍යා හෝ කලා (රාජ්‍ය/පරිපාලන)"],
+["ජීව විද්‍යාව, හෙද/සත්කාර, මනෝවිද්‍යාව","විද්‍යාව, ගෘහ ආර්ථිකය","ජීව විද්‍යා"],
+["ඉංජිනේරු, භෞතික විද්‍යාව, ආරක්ෂක, ක්‍රීඩා","විද්‍යාව, ගණිතය, ශාරීරික අධ්‍යාපනය","භෞතික විද්‍යා (ගණිතය)"],
+["ගණිතය, වාණිජ, ගිණුම්කරණය, තොරතුරු තාක්ෂණය, භාෂා","ගණිතය, සිංහල, ඉංග්‍රීසි, වාණිජ විෂයන්","වාණිජ හෝ භෞතික විද්‍යා (ගණිතය)"],
+["නීතිය, අධ්‍යාපනය, ආර්ථික විද්‍යාව, දර්ශනය, මූල්‍ය","බුද්ධාගම, ඉතිහාසය, පුරවැසි අධ්‍යාපනය","කලා හෝ වාණිජ"],
+["කලාව, සංගීතය, සැලසුම්, සාහිත්‍ය, සංචාරක","චිත්‍ර, සංගීතය, නැටුම්, සාහිත්‍ය","කලා"],
+["සිවිල් ඉංජිනේරු, කෘෂිකර්මය, භූගෝල විද්‍යාව, කර්මාන්ත","ප්‍රායෝගික හා තාක්ෂණික විෂයන්, කෘෂිකර්මය","ඉංජිනේරු තාක්ෂණ හෝ කෘෂි විද්‍යා"],
+["තොරතුරු තාක්ෂණය, විදේශ අධ්‍යාපනය, පර්යේෂණ","තොරතුරු තාක්ෂණය, ඉංග්‍රීසි","ගණිත/තාක්ෂණ"],
+["ගුප්ත විද්‍යා, පර්යේෂණ, බෞද්ධ අධ්‍යයන, ගණිතය","බුද්ධාගම, ගණිතය","කලා (බෞද්ධ අධ්‍යයන) හෝ ගණිත"]];
+const BODY=["හිස, මොළය","උගුර, බෙල්ල","අත්, පෙණහලු, ස්නායු","පපුව, ආමාශය","හදවත, කොඳු ඇට පෙළ","බඩවැල්, ජීර්ණ පද්ධතිය","වකුගඩු, පහළ පිට","ප්‍රජනක/මුත්‍රා පද්ධතිය","කලවා, අක්මාව","දණහිස්, ඇටකටු, සන්ධි","කෙණ්ඩා, රුධිර සංසරණය","පාද, ශ්ලේෂ්ම පද්ධතිය"];
+const PDIS=["හෘද රෝග, ඇස්, ඇටකටු දුර්වලතා","මානසික ආතතිය, ශ්ලේෂ්ම, ජීර්ණ ගැටලු","රුධිර, පිත්ත, උණ, තුවාල/අනතුරු","ස්නායු, සම, ශ්වසන ගැටලු","අක්මාව, මේදය, දියවැඩියාව","වකුගඩු, මුත්‍රා/ප්‍රජනක ගැටලු","සන්ධි, වාත, ඇටකටු, අවපීඩනය","අසාත්මිකතා, විෂ, හදිසි/අනපේක්ෂිත රෝග","අඥාත රෝග, ආසාදන, සම ගැටලු"];
+const DTH=["රාජකාරි/අධිකාරිය, පියා හා වැඩිහිටියන් සමඟ කරුණු, ගෞරවය හා තනතුරු","මව, නිවස/පදිංචිය, මානසික වෙනස්කම්, ගමන් හා පවුල් කරුණු","ඉඩම්/දේපළ, ශක්තිය හා තරගකාරිත්වය, සහෝදරයන්, ක්‍රෝධය/අනතුරු","අධ්‍යාපනය, ව්‍යාපාර, සන්නිවේදනය හා නව සම්බන්ධතා","ඉහළ අධ්‍යාපනය, දැනුම, දරුවන්, විවාහ හා ධන වර්ධනය","විවාහ/ආලය, සැප පහසුව, වාහන/ගෘහ භාණ්ඩ හා කලාව","වගකීම්, වෙහෙස, ප්‍රමාද, නමුත් ස්ථාවරත්වය ගොඩනැගීම","හදිසි හා අනපේක්ෂිත වෙනස්කම්, විදේශ කරුණු, තාක්ෂණය","ආධ්‍යාත්මික බව, වෙන්වීම්, අහිමිවීම් හා ගුප්ත කරුණු"];
+const ageAt=(c,t)=>Math.max(0,Math.floor((t-c.birth.getTime())/(365.25*864e5)));
+function viewAn(){const c=ST.res;if(!c)return needRes();
+ const lg=LG(c),ll=RL[lg],lh=HS(c,ll),p=LGP[lg],inL=[];for(let k=0;k<9;k++)if(HS(c,k)==1)inL.push(PN[k]);
+ const llt=HGOOD.includes(lh)?"ශුභ පිහිටීමකි; ආත්ම විශ්වාසය හා ශක්තිය හොඳින් පවතී.":HHARD.includes(lh)?"අශුභ පිහිටීමකි; ආත්ම විශ්වාසය හා සෞඛ්‍ය කෙරෙහි ඉවසීම අවශ්‍ය වේ.":"මධ්‍යස්ථ පිහිටීමකි.";
+ const lgCard=`<div class="card"><h2>ලග්නය අනුව (${RASI[lg]} ලග්නය)</h2><h3>ගතිගුණ</h3><div>${p[0]}</div><h3>සිතුවිලි</h3><div>${p[1]}</div><h3>ශරීර හැඩය</h3><div>${p[2]}</div><h3>කෙටි හැදින්වීම</h3><div>ලග්නාධිපති ${PN[ll]} ${lh} වන භාවයේ ඇත. ${llt}${inL.length?` ලග්නයේ ${inL.join(", ")} පිහිටා ඇති බැවින් ඔහුගේ/ඇයගේ ගති ලක්ෂණ ද පුද්ගලත්වයට බලපායි.`:""}</div></div>`;
+ const l4=lordOf(c,4),l5=lordOf(c,5),sc=[];for(let k=0;k<9;k++){let x=pscore(c,k);if(k==l5)x+=1;if(k==l4)x+=.5;if(HS(c,k)==4||HS(c,k)==5)x+=.5;if(k==3||k==4)x+=.5;sc.push([k,x])}
+ sc.sort((a,b)=>b[1]-a[1]);const top=sc.slice(0,3).map(x=>x[0]);
+ const e4=HS(c,l4),e5=HS(c,l5),et=(HGOOD.includes(e4)||HGOOD.includes(e5))?"අධ්‍යාපන භාවයන් ශක්තිමත් බැවින් ඉගෙනීමේ හැකියාව හොඳය.":(HHARD.includes(e4)&&HHARD.includes(e5))?"අධ්‍යාපන භාවයන් දුර්වල බැවින් වැඩි උත්සාහයක් හා නිසි මඟපෙන්වීමක් අවශ්‍ය වේ.":"උත්සාහයෙන් හොඳ ප්‍රතිඵල ලැබිය හැක.";
+ const eduCard=`<div class="card"><h2>අධ්‍යාපනය</h2><div>4 වන භාව අධිපති ${PN[l4]} (${e4} වන භාවය), 5 වන භාව අධිපති ${PN[l5]} (${e5} වන භාවය). ${et}</div><h3>වඩාත් සාර්ථක විය හැකි විෂය ක්ෂේත්‍ර</h3><div>${uniq(top.flatMap(k=>EDU[k][0].split(", "))).slice(0,8).join(", ")}</div><h3>සාමාන්‍ය පෙළ විෂයන්</h3><div>${uniq(top.flatMap(k=>EDU[k][1].split(", "))).slice(0,7).join(", ")}</div><h3>උසස් පෙළ විෂය ධාරාව</h3><div>${uniq(top.flatMap(k=>EDU[k][2].split(" හෝ "))).join(" හෝ ")}</div><p class="mut">අධ්‍යාපනයට ශක්තිමත් ග්‍රහයන්: ${top.map(k=>PN[k]).join(", ")}.</p></div>`;
+ const s7=(lg+6)%12,l7=RL[s7],h7=HS(c,l7),o7=[];for(let k=0;k<9;k++)if(HS(c,k)==7)o7.push(k);
+ const ml=o7.filter(k=>[0,2,6,7,8].includes(k)),love=l5==l7||h7==5||HS(c,l5)==7||[5,7].includes(HS(c,5));
+ const per=[];c.das.forEach(m=>m.ad.forEach(a=>{const g=ageAt(c,a.s);if((a.l==l7||a.l==5)&&g>=21&&g<=40)per.push(`${PN[m.l]} මහ දශාව · ${PN[a.l]} අපහාරය (${ds(a.s)} – ${ds(a.e)})`)}));
+ const mrCard=`<div class="card"><h2>විවාහය</h2><h3>සහකරු/සහකාරියගේ ගති ලක්ෂණ</h3><div>7 වන භාවය ${RASI[s7]} රාශියයි. ${SP[s7][0]}</div><h3>හැඩරුව</h3><div>${SP[s7][1]}</div><h3>විවාහ ස්වභාවය</h3><div>7 වන භාව අධිපති ${PN[l7]} ${h7} වන භාවයේ ඇත. ${HGOOD.includes(h7)?"විවාහ ජීවිතයට සහාය දෙන පිහිටීමකි.":HHARD.includes(h7)?"විවාහයේ ප්‍රමාද හෝ බාධා ඇති විය හැක; ඉවසීම හා අවබෝධය අවශ්‍යයි.":"මධ්‍යස්ථ පිහිටීමකි."}${ml.length?` 7 වන භාවයේ ${ml.map(k=>PN[k]).join(", ")} පිහිටා ඇති බැවින් සහකරු සමඟ අභියෝග ඇති විය හැක.`:""} ${love?"ආලයෙන් ගොඩනැගෙන විවාහයක් සඳහා ඉඩකඩ ඇත.":"යෝජිත/පවුල් මැදිහත්වීම සහිත විවාහයක් සඳහා වැඩි ඉඩකඩ ඇත."}</div><h3>විවාහයට හිතකර දශා කාල (වයස 21–40)</h3><div>${per.length?per.slice(0,5).join("<br>"):"මෙම වයස් කාලය තුළ පැහැදිලි දශා කාලයක් නොපෙනේ."}</div></div>`;
+ const bad=[];for(let k=0;k<9;k++)if(HHARD.includes(HS(c,k))||dig(k,sg(c.S[k]))=="නීච")bad.push(k);
+ const s6=(lg+5)%12,{m,a}=cur(c),nx=c.das[c.das.indexOf(m)+1];
+ const dh=k=>`${PN[k]}: ${PDIS[k]} (${shb(HS(c,k))} පිහිටීමකි).`;
+ const hlCard=`<div class="card"><h2>රෝග</h2><div>ලග්නය (${RASI[lg]}) අනුව සැලකිලිමත් විය යුතු ශරීර අංග: ${BODY[lg]}. 6 වන භාවය (${RASI[s6]}) අනුව: ${BODY[s6]}.</div><h3>අශුභ පිහිටි ග්‍රහයන් අනුව</h3><div>${bad.length?bad.map(k=>`${PN[k]}: ${PDIS[k]}`).join("<br>"):"විශේෂ දුර්වල ග්‍රහ පිහිටීමක් නැත."}</div><h3>දශා කාලය අනුව</h3><div>වත්මන් ${dh(m.l)}<br>වත්මන් අපහාරය — ${dh(a.l)}${nx?`<br>ඊළඟ මහ දශාව (${ds(nx.s)} සිට) — ${dh(nx.l)}`:""}</div><p class="mut">මෙය රෝග විනිශ්චයක් නොවේ; සෞඛ්‍ය ගැටලු සඳහා වෛද්‍ය උපදෙස් ලබාගන්න.</p></div>`;
+ return lgCard+eduCard+mrCard+hlCard}
+function lifeCh(c){const{m}=cur(c);return `<div class="card"><h2>දශා කාලය අනුව ජීවිතයේ වෙනස්වීම්</h2><div class="scroll"><table><tr><th>මහ දශාව</th><th>කාලය</th><th>වයස</th></tr>${c.das.map(x=>`<tr class="${x===m?"cur":""}"><td>${PN[x.l]}</td><td>${ds(x.s)} – ${ds(x.e)}</td><td>${ageAt(c,x.s)}–${ageAt(c,x.e)}</td></tr>`).join("")}</table></div>${c.das.map(x=>{const h=HS(c,x.l),t=HGOOD.includes(h)?"සාමාන්‍යයෙන් ප්‍රගතිශීලී කාලයකි.":HHARD.includes(h)?"අභියෝග සහිත කාලයකි; ඉවසීම අවශ්‍ය වේ.":"මිශ්‍ර ප්‍රතිඵල ලැබෙන කාලයකි.";return `<h3>${PN[x.l]} මහ දශාව <span class="tag">${shb(h)} · ${h} වන භාවය</span></h3><div>${DTH[x.l]} සම්බන්ධ වෙනස්කම් ප්‍රධාන වේ. ${PN[x.l]} ${h} වන භාවයේ (${HAREA[h]}) පිහිටි නිසා ඒ ක්ෂේත්‍රයේ වෙනස්කම් විශේෂයෙන් දැනේ. ${t}</div>`}).join("")}</div>`}
+function viewDs(){const r=viewDs0();return ST.res?r+lifeCh(ST.res):r}
+function viewHd(){return `<div class="card hand"><h2>අත් රේඛා ඡායාරූප ඇතුළත් කරන්න</h2><div class="mut">වම් සහ දකුණු අත් දෙක වෙන වෙනම ගොනුවලින් ඇතුළත් කළ හැක.</div>
+ <label>වම් අත</label><input type="file" accept="image/*" onchange="hp(this,'L')"><div id="hL">${HAND.L?`<img src="${HAND.L}" alt="වම් අත">`:""}</div>
+ <label>දකුණු අත</label><input type="file" accept="image/*" onchange="hp(this,'R')"><div id="hR">${HAND.R?`<img src="${HAND.R}" alt="දකුණු අත">`:""}</div>
+ <p class="mut">ඡායාරූප මෙම උපකරණයේම පෙන්වයි; ස්වයංක්‍රීය රේඛා විග්‍රහයක් තවමත් නොමැත. විස්තරාත්මක අත් බැලීමක් සඳහා “වැඩිදුර” කොටස බලන්න.</p></div>`}
+function hp(el,s){const f=el.files[0];if(!f)return;HAND[s]=URL.createObjectURL(f);document.getElementById("h"+s).innerHTML=`<img src="${HAND[s]}" alt="">`}
+function viewMo(){return `<div class="card price"><h2>වැඩිදුර තොරතුරු</h2><div class="big">රු. 500</div><div>විස්තරාත්මක වාර්තාව · පිටු 5ක්</div>
+ <p class="mut">දැනට ගෙවීම් පද්ධතියක් සම්බන්ධ කර නැත. දුරකථනයෙන් අප අමතා වැඩිදුර විස්තර ලබාගන්න.</p>
+ <a class="call" href="tel:${PHONE.replace(/\s/g,"")}">${PHONE} අමතන්න</a></div>`}
+function render(){nav();const V={in:viewIn,ch:viewCh,ds:viewDs,pr:viewPr,rm:viewRm,hd:viewHd,sm:viewSm,mo:viewMo};document.getElementById("app").innerHTML=`<div class="noprint">${langBar()}</div>`+V[ST.tab]()}
+const EX=[0,1,9,5,3,11,6,1,7];
+function dig(k,s){return s==EX[k]?"උච්ච":s==(EX[k]+6)%12?"නීච":(k<7&&RL[s]==k)?"ස්වක්ෂේත්‍ර":"-"}
+function chartHtml(S,lg,mid,num){const pos=[[0,1],[0,2],[0,3],[1,3],[2,3],[3,3],[3,2],[3,1],[3,0],[2,0],[1,0],[0,0]],cont={};
+ for(let k=0;k<9;k++){const s=sg(S[k]),d=shb((s-lg+12)%12+1);(cont[s]=cont[s]||[]).push(PS[k]+(d=="ශුභ"?"✓":d=="අශුභ"?"✗":""))}
+ let g="";for(let s=0;s<12;s++){const[r,cl]=pos[s];g+=`<div class="${s==lg?"lg":""}" style="grid-area:${r+1}/${cl+1}"><small>${RASI[s]}${num?` <b>(${(s-lg+12)%12+1})</b>`:""}</small>${s==lg?"<b>ල</b> ":""}${(cont[s]||[]).join(" ")}</div>`}
+ return `<div class="chart">${g}<div class="c" style="grid-area:2/2/4/4">${mid}</div></div><p class="mut">✓ ශුභ · ✗ අශුභ · ල ලග්නය${num?" · (අංක) භාව අංකය":""}</p>`}
+function tbl(c,S){return `<div class="scroll"><table><tr><th>${T("ග්‍රහයා","Planet","கிரகம்")}</th><th>${T("රාශිය","Sign","ராசி")}</th><th>${T("අංශ","Degree","பாகை")}</th><th>${T("නැකත","Nakshatra","நட்சத்திரம்")}</th><th>${T("භාවය","House","பாவம்")}</th><th>${T("තත්වය","Status","நிலை")}</th></tr>${PN.map((n,k)=>{const q=nak(S[k]),s=sg(S[k]),d=shb((s-LG(c)+12)%12+1);return `<tr><td>${n}</td><td>${RASI[s]}</td><td>${fmt(S[k])}</td><td>${NAK[q[0]]} ${q[1]}</td><td>${(s-LG(c)+12)%12+1}</td><td class="${d=="ශුභ"?"good":d=="අශුභ"?"bad":""}">${d}</td></tr>`}).join("")}</table></div>`}
+function exl(c,S){const hh=k=>(sg(S[k])-LG(c)+12)%12+1,e=PN.filter((_,k)=>HGOOD.includes(hh(k))),l=PN.filter((_,k)=>HHARD.includes(hh(k)));return `<p><span class="good">ශුභ:</span> ${e.join(", ")||"නැත"} · <span class="bad">අශුභ:</span> ${l.join(", ")||"නැත"}</p>`}
+function viewCh(){const c=ST.res;if(!c)return needRes();const nk=nak(c.S[1]),n=c.v.date;
+ return `<div class="card"><div class="mut">${c.v.name||"කේන්දරය"} · ${c.v.date} ${c.v.time} · ${c.v.place}</div>
+<div class="big">${T("ලග්නය","Lagna","லக்னம்")}: ${RASI[LG(c)]} <span class="mut">${fmt(c.asc)}</span></div>
+<div>${T("චන්ද්‍ර රාශිය","Moon sign","சந்திர ராசி")}: ${RASI[sg(c.S[1])]} · ${T("නැකත","Nakshatra","நட்சத்திரம்")}: ${NAK[nk[0]]} ${nk[1]}${T(" වන පාදය","th pada"," ஆம் பாதம்")}</div>
+<div class="mut">${T("ලග්නාධිපති","Lagna lord","லக்னாதிபதி")}: ${PN[RL[LG(c)]]} · ${T("අයනාංශය (ලාහිරි)","Ayanamsa (Lahiri)","அயனாம்சம் (லாஹிரி)")}: ${fmt(c.ay)}</div>
+${(c.asc%30>28.5||c.asc%30<1.5)?`<p class="mut">ලග්නය රාශි සීමාවට ආසන්නයි; උපන් වේලාව විනාඩි කිහිපයක් වෙනස් වුවහොත් ලග්නය වෙනස් විය හැක.</p>`:""}</div>
+<div class="card"><h2>${T("තියෙන (වත්මන්) කේන්දරය","Current Chart","தற்போதைய ஜாதகம்")}</h2><div class="mut">${T("උපන් දිනය ("+n+") සඳහා ග්‍රහ පිහිටීම්; භාව ගණන් කරන්නේ ජම්ම ලග්නයෙනි.","Planet positions for "+n+"; houses counted from the birth lagna.","பிறந்த தேதி ("+n+") கிரக நிலைகள்; பாவங்கள் ஜென்ம லக்னத்திலிருந்து.")}</div>${chartHtml(c.now.S,LG(c),T("වත්මන්<br>කේන්දරය","Current<br>Chart","தற்போதைய<br>ஜாதகம்")+"<br><b>"+T("ලග්නය","Lagna","லக்னம்")+": "+RASI[LG(c)]+"</b>",true)}${tbl(c,c.now.S)}${exl(c,c.now.S)}<button class="btn alt" onclick="go('ds')">${T("දශා බලන්න","View Dasha","தசை பார்க்க")}</button></div>
+<div class="card"><h2>${T("ජම්ම කේන්දරය","Birth Chart","ஜென்ம ஜாதகம்")}</h2>${chartHtml(c.S,LG(c),RASI[LG(c)]+" "+T("ලග්නය","Lagna","லக்னம்"))}${tbl(c,c.S)}${exl(c,c.S)}</div>`}
+const PALM={L:{t:""},R:{t:""}};
+const LINES=[{n:"ආයු රේඛාව",re:/life line|ආයු|ජීව/i,h:1,pl:[0]},{n:"මස්තිෂ්ක රේඛාව",re:/head line|intellect|මස්තිෂ්ක|බුද්ධි/i,h:5,pl:[3,4]},{n:"හෘද රේඛාව",re:/heart line|හෘද/i,h:4,pl:[1,5]},{n:"භාග්‍ය රේඛාව",re:/fate|destiny|භාග්‍ය/i,h:10,pl:[6]},{n:"සූර්ය රේඛාව",re:/sun line|apollo|සූර්ය|කීර්ති/i,h:9,pl:[0,4]},{n:"විවාහ රේඛාව",re:/marriage|relationship|විවාහ/i,h:7,pl:[5]}];
+function strength(c,L){const s=(LG(c)+L.h-1)%12,lh=HS(c,RL[s]);let x=HGOOD.includes(lh)?1:HHARD.includes(lh)?-1:0;L.pl.forEach(k=>{const d=dig(k,sg(c.S[k]));if(d=="උච්ච"||d=="ස්වක්ෂේත්‍ර")x+=1;if(d=="නීච")x-=1;if(HHARD.includes(HS(c,k)))x-=.5});return x>=1?1:x<=-.5?-1:0}
+function palmV(t,L){if(!t)return null;const ss=t.split(/(?<=[.!?\n])\s+/);let i=ss.findIndex(s=>L.re.test(s));if(i<0)return null;const ctx=ss[i]+" "+(ss[i+1]||"");const p=(ctx.match(/deep|strong|long|clear|well|good|ගැඹුරු|දිගු|පැහැදිලි|ශක්තිමත්|හොඳ/gi)||[]).length,q=(ctx.match(/weak|broken|short|faint|chain|island|break|shallow|දුර්වල|කැඩ|කෙටි|බාධා|අඳුරු|දුබල/gi)||[]).length;return p>q?1:q>p?-1:0}
+const lab=v=>v==null?"—":v>0?"ශක්තිමත්":v<0?"දුර්වල":"මධ්‍යස්ථ";
+function palmReport(){const c=ST.res;if(!c)return"";if(!PALM.L.t.trim()&&!PALM.R.t.trim())return `<div class="card"><h2>අත් රේඛා සංසන්දනය</h2><div class="mut">අත් රේඛා PDF වාර්තාව තවම ඇතුළත් කර නැත.</div></div>`;
+ let ag=0,df=0;const rows=LINES.map(L=>{const l=palmV(PALM.L.t,L),r=palmV(PALM.R.t,L),a=[l,r].filter(x=>x!=null),pv=a.length?Math.sign(a.reduce((x,y)=>x+y,0)):null,cv=strength(c,L);let res;
+ if(pv==null)res="වාර්තාවේ සඳහන් නැත; කේන්දරය පමණි: "+lab(cv);else if(pv==cv){ag++;res=cv>0?"දෙකම ශක්තිමත් — සාධනීය":cv<0?"දෙකම දුර්වල — පිළියම් අවශ්‍ය":"දෙකම මධ්‍යස්ථ"}else{df++;res="වෙනස් සංඥා — "+(cv>pv?"කේන්දරය වඩා යහපත්":"අත් රේඛාව වඩා යහපත්")+"; ප්‍රවේශමෙන් සලකන්න"}
+ return `<tr><td>${L.n}</td><td>${lab(l)}</td><td>${lab(r)}</td><td>${lab(cv)}</td><td style="white-space:normal">${res}</td></tr>`}).join("");
+ return `<div class="card"><h2>අත් රේඛා හා ජම්ම කේන්දරය සංසන්දනය</h2><div class="scroll"><table><tr><th>රේඛාව</th><th>වම</th><th>දකුණ</th><th>කේන්දරය</th><th>නිගමනය</th></tr>${rows}</table></div><p>ගැලපුණු: ${ag} · වෙනස් වූ: ${df}. ${ag>=df?"සමස්තයක් ලෙස අත් රේඛා හා කේන්දරය බොහෝ දුරට එකඟයි.":"අත් රේඛා හා කේන්දරය අතර වෙනස්කම් ඇත; ජ්‍යොතිර්වේදියෙකු සමඟ සාකච්ඡා කරන්න."}</p><p class="mut">වාර්තාවේ පාඨයෙන් රේඛා නම් සහ “ගැඹුරු/දිගු/දුර්වල/කැඩුණු” වැනි වචන සොයා ගත් සරල සංසන්දනයකි.</p></div>`}
+async function pdfText(f){pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";const d=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;let t="";for(let i=1;i<=Math.min(d.numPages,30);i++){const p=await d.getPage(i),x=await p.getTextContent();t+=x.items.map(y=>y.str).join(" ")+"\n"}return t}
+async function pp(el,s){const f=el.files[0];if(!f)return;PALM[s].name=f.name;PALM[s].err=false;try{PALM[s].t=await pdfText(f);PALM[s].err=!PALM[s].t.trim()}catch(e){PALM[s].err=true}render()}
+function viewHd(){const b=(s,n)=>`<label>${n} (PDF)</label><input type="file" accept="application/pdf" onchange="pp(this,'${s}')">${PALM[s].name?`<div class="mut">${PALM[s].name}</div>`:""}${PALM[s].err?`<div class="bad">PDF එකෙන් අකුරු කියවිය නොහැකි විය. වාර්තාවේ පාඨය පහත අලවන්න.</div>`:""}<textarea placeholder="වාර්තා පාඨය මෙහි අලවන්න (අවශ්‍ය නම් පමණක්)" oninput="PALM['${s}'].t=this.value">${PALM[s].err?"":""}</textarea>`;
+ return `<div class="card"><h2>අත් රේඛා වාර්තාව (PDF)</h2><div class="mut">අත් රේඛා වාර්තාවේ PDF ගොනුව පමණක් ඇතුළත් කරන්න. එය ජම්ම කේන්දරය සමඟ ස්වයංක්‍රීයව සංසන්දනය වේ.</div>${b("L","වම් අත")}${b("R","දකුණු අත")}<button class="btn" onclick="render()">කේන්දරය සමඟ සසඳන්න</button></div>${ST.res?palmReport():needRes()}`}
+function viewSm(){const c=ST.res;if(!c)return needRes();return `<button class="btn" onclick="window.print()">සාරාංශය ප්‍රින්ට් කරන්න</button><p class="mut noprint">ප්‍රින්ට් නොවුනහොත් බ්‍රවුසරයේ Share/Print මෙනුවෙන් PDF ලෙස සුරකින්න.</p>`+viewCh()+viewAn()+viewDs()+viewPr()+viewRm()+palmReport()}
+const esc=s=>String(s).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+function shrink(f){return new Promise(res=>{const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const k=Math.min(1,1280/Math.max(im.width,im.height)),cv=document.createElement("canvas");cv.width=im.width*k;cv.height=im.height*k;cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);const url=cv.toDataURL("image/jpeg",.8);cv.toBlob(b=>res({blob:b,url}),"image/jpeg",.8)};im.onerror=()=>res(null);im.src=u})}
+async function pp(el,s){const f=el.files[0];if(!f)return;const r=await shrink(f);if(!r){alert("පින්තූරය කියවිය නොහැක");return}PALM[s].blob=r.blob;PALM[s].url=r.url;PALM.report="";render()}
+function chartText(c){const x=cur(c);return `ලග්නය ${RASI[LG(c)]}; `+PN.map((n,k)=>`${n}: ${RASI[sg(c.S[k])]} (${HS(c,k)} වන භාවය, ${dig(k,sg(c.S[k]))})`).join("; ")+`; වත්මන් දශාව ${PN[x.m.l]}, අපහාරය ${PN[x.a.l]}`}
+async function analyze(){const c=ST.res;if(!c){alert("මුලින් කේන්දරය ගණනය කරන්න");return}
+ const imgs=[],lbl=[];if(PALM.L.blob){imgs.push(PALM.L.blob);lbl.push("වම් අත")}if(PALM.R.blob){imgs.push(PALM.R.blob);lbl.push("දකුණු අත")}
+ if(!imgs.length){alert("අත් ඡායාරුප ඇතුළත් කරන්න");return}
+ const out=document.getElementById("pr_out");out.textContent="විශ්ලේෂණය කරමින්...";
+ try{const sample=(typeof claude!=="undefined")?await claude.use("sample"):null;if(!sample){out.textContent="ඡායාරූප AI විශ්ලේෂණයට සේවාදායක (server) සම්බන්ධයක් අවශ්‍යයි. මෙම ස්වාධීන අනුවාදයේ එය නැත; ඡායාරූප පෙන්වීම පමණක් ක්‍රියා කරයි.";return}
+ const prompt=`ඔබ අත් රේඛා සහ ජ්‍යොතිෂ විශේෂටවෙකෙකි. රූප ${imgs.length}ක් ඇත (පිළිවෙළින්: ${lbl.join(", ")}). ජම්ම කේන්දරය: ${chartText(c)}.\nකාර්යය: රූපවල පෙනෙන ආයු, මස්තිෂ්ක, හෘද, භාග්‍ය, සූර්ය, විවාහ රේඛා හඳුනා ගෙන, ඒවා කේන්දරයේ අදාළ භාවය/ග්‍රහයා (ආයු=ලග්නය, මස්තිෂ්ක=5 වන භාවය/බුධ/ගුරු, හෘද=4 වන භාවය/චන්ද්‍ර/සිකුරු, භාග්‍ය=10 වන භාවය/ශනි, සූර්ය=රවි, විවාහ=7 වන භාවය/සිකුරු) සමඟ සසඳන්න. එක් එක් රේඛාව සඳහා: අතේ පෙනෙන්නේ කුමක්ද, කේන්දරය කුමක් කියයිද, ගැලපේද වෙනස්ද යන්න ලියන්න. අවසානයේ සාරාංශයක් දෙන්න. රේඛාවක් රූපයෙන් පැහැදිලි නැත්නම් එය පැහැදිලිව කියන්න; අනුමාන කර නොලියන්න. සොඛ්‍ය/මරණ පිළබඳ බිය ගන්වන ප්‍රකාශ එපා. සිංහලෙන්, සරල අකුරින් (markdown, **, # නොමතිව) ලියන්න.`;
+ const r=await sample(prompt,{images:imgs,modelTier:"default",cache:false,onText:({text})=>{out.textContent=text}});
+ PALM.report=r.text;out.textContent=r.text}catch(e){out.textContent="විශ්ලේෂණය අසාර්ථකයි: "+((e&&(e.message||e.code))||"")}}
+function viewHd(){const b=(s,n)=>`<label>${n}</label><input type="file" accept="image/*" onchange="pp(this,'${s}')">${PALM[s].url?`<img src="${PALM[s].url}" alt="${n}" style="width:100%;max-height:220px;object-fit:cover;border-radius:8px;margin-top:8px">`:""}`;
+ return `<div class="card"><h2>අත් රේඛා ඡායාරූප</h2><div class="mut">වම් සහ දකුණු අත් දෙකේ රූප (JPG/PNG) වෙන වෙනම ඇතුළත් කළ හැක. අතින් පැහැදිලි හලින් ඡායාරූපය ගන්න.</div>${b("L","වම් අත")}${b("R","දකුණු අත")}<button class="btn" onclick="analyze()">ඡායාරූප විශ්ලේෂණය කර කේන්දරය සමඟ සසඳන්න</button><div id="pr_out" style="white-space:pre-wrap;margin-top:12px">${esc(PALM.report||"")}</div></div>${ST.res?"":needRes()}`}
+function palmReport(){return PALM.report?`<div class="card"><h2>අත් රේඛා සහ ජම්ම කේන්දර සංසන්දනය</h2><div style="white-space:pre-wrap">${esc(PALM.report)}</div></div>`:""}
+render();
+</script>
+</body>
+</html>
